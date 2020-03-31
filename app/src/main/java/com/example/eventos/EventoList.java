@@ -36,7 +36,7 @@ public class EventoList extends ArrayAdapter<Evento> {
         tvDescricao.setText(evento.getDescricao());
         tvData.setText(evento.getData());
         tvValor.setText(String.valueOf(evento.getValor()));
-        tvQtdeVagas.setText(evento.getQtdeVagas());
+        tvQtdeVagas.setText(String.valueOf(evento.getQtdeVagas()));
         tvLocalRealizacao.setText(evento.getLocalRealizacao());
 
         return listViewItem;

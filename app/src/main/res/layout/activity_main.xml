@@ -7,98 +7,34 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/etNome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Nome"
-        android:text="Teste"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etDescricao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:hint="Descrição"
-        android:lines="2"
-        android:maxLength="2500"
-        android:maxLines="5"
-        android:text="Evento realizado em parceria com ADS"
+    <ImageButton
+        android:id="@+id/btnLogar"
+        android:layout_width="43dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:background="#00FFFFFF"
+        android:onClick="logar"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNome" />
-
-
-    <EditText
-        android:id="@+id/etData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoText="true"
-        android:ems="10"
-        android:inputType="date"
-        android:text="23/03/2020"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDescricao" />
-
-    <EditText
-        android:id="@+id/etValor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="20.30"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etData" />
-
-    <EditText
-        android:id="@+id/etQtdeVagas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:text="500"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etValor" />
-
-    <EditText
-        android:id="@+id/etLocalRealizacao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Local"
-        android:text="Auditório"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etQtdeVagas" />
-
-    <Button
-        android:id="@+id/btnSalvar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLocalRealizacao" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/admin"
+        tools:srcCompat="@drawable/admin" />
 
     <ListView
         android:id="@+id/ltEventos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSalvar"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogar"
         tools:ignore="MissingConstraints" />
 
 

@@ -2,6 +2,7 @@ package com.example.eventos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,20 +25,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText etNome;
-    private EditText etDescricao;
-    private EditText etData;
-    private EditText etValor;
-    private EditText etQtdeVagas;
-    private EditText etLocalRealizacao;
-    private Button btnSalvar;
-
     ListView ltEventos;
 
     List<Evento> eventos;
 
-    public static final String ARTIST_NAME = "com.example.eventos.artistname";
-    public static final String ARTIST_ID = "com.example.eventos.artistid";
+    /*public static final String ARTIST_NAME = "com.example.eventos.artistname";
+    public static final String ARTIST_ID = "com.example.eventos.artistid";*/
 
     DatabaseReference databaseEventos;
     /*private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -50,68 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         databaseEventos = FirebaseDatabase.getInstance().getReference("eventos");
 
-        etNome = findViewById(R.id.etNome);
-        etDescricao = findViewById(R.id.etDescricao);
-        etData = findViewById(R.id.etData);
-        etValor = findViewById(R.id.etValor);
-        etQtdeVagas = findViewById(R.id.etQtdeVagas);
-        etLocalRealizacao = findViewById(R.id.etLocalRealizacao);
         ltEventos = (ListView) findViewById(R.id.ltEventos);
-        btnSalvar = (Button) findViewById(R.id.btnSalvar);
 
         eventos = new ArrayList<>();
-
-        //criar a mascara
-        SimpleMaskFormatter simpleMaskFormatterData =
-                new SimpleMaskFormatter("NN/NN/NNNN");
-        MaskTextWatcher maskTextWatcherData =
-                new MaskTextWatcher(etData, simpleMaskFormatterData);
-        etData.addTextChangedListener(maskTextWatcherData);
-
-        SimpleMaskFormatter simpleMaskFormatterValor =
-                new SimpleMaskFormatter("N,N");
-        MaskTextWatcher maskTextWatcherValor =
-                new MaskTextWatcher(etValor, simpleMaskFormatterValor);
-        etValor.addTextChangedListener(maskTextWatcherValor);
-
-        //adding an onclicklistener to button
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    addEvento();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-    }
-
-    private void addEvento() throws ParseException {
-        String nome = etNome.getText().toString().trim();
-        String descricao = etDescricao.getText().toString().trim();
-        String data = etData.getText().toString().trim();
-        String valor = etValor.getText().toString().trim();
-        String qtdeVagas = etQtdeVagas.getText().toString().trim();
-        String localRealizacao = etLocalRealizacao.getText().toString().trim();
-
-        if (!TextUtils.isEmpty(nome) && !TextUtils.isEmpty(descricao) && !TextUtils.isEmpty(data) && !TextUtils.isEmpty(valor) && !TextUtils.isEmpty(qtdeVagas) && !TextUtils.isEmpty(localRealizacao)) {
-            String id = databaseEventos.push().getKey();
-
-            //Date dataParse = new SimpleDateFormat("dd/MM/yyyy").parse(data);
-            double valorParse = Double.parseDouble(valor);
-            int qtdeVagasParse = Integer.parseInt(qtdeVagas);
-            Evento evento = new Evento(id, nome, descricao, data, valorParse, qtdeVagasParse, localRealizacao);
-
-            databaseEventos.child(id).setValue(evento);
-            //etNome.setText("");
-
-            Toast.makeText(this, "Evento cadastrado com sucesso.", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_LONG).show();
-        }
-
     }
 
     @Override
@@ -144,5 +78,10 @@ public class MainActivity extends AppCompatActivity {
             //a
             }
         });
+    }
+
+    public void logar(View view) {
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
     }
 }
