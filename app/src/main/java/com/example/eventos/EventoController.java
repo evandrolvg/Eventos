@@ -3,6 +3,7 @@ package com.example.eventos;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,7 +50,7 @@ public class EventoController extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cadastro_evento);
+        setContentView(R.layout.lista_evento);
 
         databaseEventos = FirebaseDatabase.getInstance().getReference("eventos");
 
@@ -67,21 +68,8 @@ public class EventoController extends AppCompatActivity {
 
         eventos = new ArrayList<>();
 
-        //criar a mascara
-        SimpleMaskFormatter simpleMaskFormatterData =
-                new SimpleMaskFormatter("NN/NN/NNNN");
-        MaskTextWatcher maskTextWatcherData =
-                new MaskTextWatcher(etData, simpleMaskFormatterData);
-        etData.addTextChangedListener(maskTextWatcherData);
-
-        SimpleMaskFormatter simpleMaskFormatterValor =
-                new SimpleMaskFormatter("N,N");
-        MaskTextWatcher maskTextWatcherValor =
-                new MaskTextWatcher(etValor, simpleMaskFormatterValor);
-        etValor.addTextChangedListener(maskTextWatcherValor);
-
         //adding an onclicklistener to button
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
+        /*btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -91,7 +79,7 @@ public class EventoController extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
 
         ltEventos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -146,25 +134,37 @@ public class EventoController extends AppCompatActivity {
 
     private boolean updateEvento(String id, String nome, String descricao, String data, Double valor, int qtdeVagas, String localRealizacao) {
         //getting the specified artist reference
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("eventos").child(id);
+        //DatabaseReference dR = FirebaseDatabase.getInstance().getReference("eventos").child(id);
 
-        //updating artist
+        Log.d("update", "id: " + id);
+
         Evento evento = new Evento(id, nome, descricao, data, valor, qtdeVagas, localRealizacao);
-        dR.setValue(evento);
+        //dR.setValue(evento);
+        Log.d("teste", nome);
+        databaseEventos.child(id).setValue(evento);
         Toast.makeText(getApplicationContext(), "Evento atualizado", Toast.LENGTH_LONG).show();
+
         return true;
     }
 
     private void showUpdateDeleteDialog(final String id, String nome, String descricao, String data, Double valor, int qtdeVagas, String localRealizacao) {
-
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.cadastro_evento, null);
+        final View dialogView = inflater.inflate(R.layout.add_evento, null);
         dialogBuilder.setView(dialogView);
+
+        final ImageButton btnSalvar = (ImageButton) dialogView.findViewById(R.id.btnSalvar);
+        final ImageButton btnDelete = (ImageButton) dialogView.findViewById(R.id.btnDelete);
+
+        final EditText etNome = (EditText) dialogView.findViewById(R.id.etNome);
+        final EditText etDescricao = (EditText) dialogView.findViewById(R.id.etDescricao);
+        final EditText etData = (EditText) dialogView.findViewById(R.id.etData);
+        final EditText etValor = (EditText) dialogView.findViewById(R.id.etValor);
+        final EditText etQtdeVagas = (EditText) dialogView.findViewById(R.id.etQtdeVagas);
+        final EditText etLocalRealizacao = (EditText) dialogView.findViewById(R.id.etLocalRealizacao);
 
         final AlertDialog b = dialogBuilder.create();
         b.show();
-
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,6 +182,9 @@ public class EventoController extends AppCompatActivity {
 
                     updateEvento(id, nome, descricao, data, valorParse, qtdeVagasParse, localRealizacao);
                     b.dismiss();
+                    atualizaLista();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Por favor, preencha todos os campos", Toast.LENGTH_LONG).show();
                 }
             }
         });

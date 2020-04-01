@@ -118,14 +118,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etLocalRealizacao"
         app:srcCompat="@android:drawable/ic_menu_delete" />
 
-    <ListView
-        android:id="@+id/ltEventos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSalvar"
-        tools:ignore="MissingConstraints" />
+    
 
 
 
