@@ -10,29 +10,43 @@
         android:id="@+id/tvNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nome"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="8dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/tvDescricao"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tvDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Descrição"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="12dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNome"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tvData"
-        android:layout_width="147dp"
-        android:layout_height="23dp"
-        android:text="Data"
+        android:layout_width="284dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLocalRealizacao"
         tools:ignore="MissingConstraints" />
@@ -40,35 +54,91 @@
     <TextView
         android:id="@+id/tvValor"
         android:layout_width="130dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:text="Valor"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="4dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        app:layout_constraintStart_toEndOf="@+id/tvData"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="79dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvData"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tvQtdeVagas"
-        android:layout_width="75dp"
-        android:layout_height="23dp"
-        android:text="Quantidade de Vagas"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintStart_toEndOf="@+id/tvValor"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="79dp" />
+        app:layout_constraintTop_toBottomOf="@+id/tvData"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tvLocalRealizacao"
-        android:layout_width="match_parent"
+        android:layout_width="284dp"
         android:layout_height="wrap_content"
-        android:text="Local"
+        android:layout_marginTop="4dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescricao"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="9dp"
+        android:text="@string/data"
+        app:layout_constraintEnd_toStartOf="@+id/tvLocalRealizacao"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="9dp"
+        android:text="@string/cifras"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/tvLocalRealizacao"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/local"
+        app:layout_constraintEnd_toStartOf="@+id/tvLocalRealizacao"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescricao" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/vagasmin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.636"
+        app:layout_constraintStart_toEndOf="@+id/tvQtdeVagas"
+        app:layout_constraintTop_toBottomOf="@+id/tvData" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

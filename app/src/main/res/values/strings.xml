@@ -9,4 +9,15 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="nome">Nome</string>
+    <string name="descricao">Descrição</string>
+    <string name="data">Data</string>
+    <string name="valor">Valor</string>
+    <string name="vagas">Vagas</string>
+    <string name="local">Local</string>
+    <string name="cifras">R$</string>
+    <string name="vagasmin">vagas</string>
+
+
+
 </resources>
