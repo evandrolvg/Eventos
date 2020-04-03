@@ -1,6 +1,5 @@
 package com.example.eventos;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -34,13 +33,18 @@ public class EventoController extends AppCompatActivity {
     private EditText etLocalRealizacao;
     private ImageButton btnSalvar;
     private ImageButton btnDelete;
+    private ImageButton btnInscritos;
 
     private FloatingActionButton btnAddEvento;
 
     ListView ltEventos;
     List<Evento> eventos;
 
+    ListView ltInscricoes;
+    List<Inscricao> inscricoes;
+
     DatabaseReference databaseEventos;
+    DatabaseReference databaseInscricoes;
 
     private Evento eventoSelecionado;
 
@@ -60,14 +64,19 @@ public class EventoController extends AppCompatActivity {
         etQtdeVagas = findViewById(R.id.etQtdeVagas);
         etLocalRealizacao = findViewById(R.id.etLocalRealizacao);
 
-        btnSalvar = (ImageButton) findViewById(R.id.btnInscricao);
+        btnSalvar = (ImageButton) findViewById(R.id.btnSalvar);
         btnDelete = (ImageButton) findViewById(R.id.btnDelete);
+        btnInscritos = (ImageButton) findViewById(R.id.btnInscritos);
 
         btnAddEvento = (FloatingActionButton) findViewById(R.id.btnAddEvento);
 
         ltEventos = (ListView) findViewById(R.id.ltEventos);
 
         eventos = new ArrayList<>();
+
+        ltInscricoes = (ListView) findViewById(R.id.ltInscricoes);
+
+        inscricoes = new ArrayList<>();
 
         ltEventos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -93,7 +102,7 @@ public class EventoController extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.add_evento, null);
         dialogBuilder.setView(dialogView);
 
-        final ImageButton btnSalvar = (ImageButton) dialogView.findViewById(R.id.btnInscricao);
+        final ImageButton btnSalvar = (ImageButton) dialogView.findViewById(R.id.btnSalvar);
 
         final EditText etNome = (EditText) dialogView.findViewById(R.id.etNome);
         final EditText etDescricao = (EditText) dialogView.findViewById(R.id.etDescricao);
@@ -135,8 +144,9 @@ public class EventoController extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.add_evento, null);
         dialogBuilder.setView(dialogView);
 
-        final ImageButton btnSalvar = (ImageButton) dialogView.findViewById(R.id.btnInscricao);
+        final ImageButton btnSalvar = (ImageButton) dialogView.findViewById(R.id.btnSalvar);
         final ImageButton btnDelete = (ImageButton) dialogView.findViewById(R.id.btnDelete);
+        final ImageButton btnInscritos = (ImageButton) dialogView.findViewById(R.id.btnInscritos);
 
         final EditText etNome = (EditText) dialogView.findViewById(R.id.etNome);
         final EditText etDescricao = (EditText) dialogView.findViewById(R.id.etDescricao);
@@ -144,6 +154,7 @@ public class EventoController extends AppCompatActivity {
         final EditText etValor = (EditText) dialogView.findViewById(R.id.etValor);
         final EditText etQtdeVagas = (EditText) dialogView.findViewById(R.id.etQtdeVagas);
         final EditText etLocalRealizacao = (EditText) dialogView.findViewById(R.id.etLocalRealizacao);
+        final ListView ltInscricoes = (ListView) dialogView.findViewById(R.id.ltInscricoes);
 
         final AlertDialog b = dialogBuilder.create();
         b.show();
@@ -178,10 +189,41 @@ public class EventoController extends AppCompatActivity {
                 b.dismiss();
             }
         });
+
+        btnInscritos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseInscricoes = FirebaseDatabase.getInstance().getReference("inscricoes").child(id);
+                databaseInscricoes.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        inscricoes.clear();
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            Inscricao inscricao = postSnapshot.getValue(Inscricao.class);
+                            inscricoes.add(inscricao);
+                        }
+
+                        if (inscricoes.size() > 0) {
+                            InscricaoList inscricaoAdapter = new InscricaoList(EventoController.this, inscricoes);
+
+                            ltInscricoes.setAdapter(inscricaoAdapter);
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Nenhum inscrito", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.d("databaseError", String.valueOf(databaseError));
+                    }
+                });
+            }
+        });
+
     }
 
     private boolean addUpdateEvento(String id, String nome, String descricao, String data, Double valor, int qtdeVagas, String localRealizacao) {
-        Log.d("ID", "ID:" + id);
+        //Log.d("ID", "ID:" + id);
         if (!TextUtils.isEmpty(id) && !id.equals(NULL)){
             Evento evento = new Evento(id, nome, descricao, data, valor, qtdeVagas, localRealizacao);
 
@@ -210,11 +252,6 @@ public class EventoController extends AppCompatActivity {
         }
 
         return true;
-    }
-
-    public void listar(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
     }
 
     public void atualizaLista() {

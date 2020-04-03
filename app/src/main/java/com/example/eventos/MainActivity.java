@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +24,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     ListView ltEventos;
     List<Evento> eventos;
+    ListView ltInscricoes;
+    List<Inscricao> inscricoes;
+
     DatabaseReference databaseEventos;
     DatabaseReference databaseInscricoes;
 
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         databaseEventos = FirebaseDatabase.getInstance().getReference("eventos");
         ltEventos = (ListView) findViewById(R.id.ltEventos);
         eventos = new ArrayList<>();
+        ltInscricoes = (ListView) findViewById(R.id.ltInscricoes);
+        inscricoes = new ArrayList<>();
 
         ltEventos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.inscricao_evento, null);
         dialogBuilder.setView(dialogView);
 
-        final ImageButton btnInscricao = (ImageButton) dialogView.findViewById(R.id.btnInscricao);
+        final ImageButton btnInscricao = (ImageButton) dialogView.findViewById(R.id.btnSalvar);
 
         final EditText etNome = (EditText) dialogView.findViewById(R.id.etNomeInscricao);
         final EditText etEmail = (EditText) dialogView.findViewById(R.id.etEmailInscricao);

@@ -92,34 +92,47 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <ImageButton
-        android:id="@+id/btnInscricao"
-        android:layout_width="136dp"
-        android:layout_height="56dp"
+        android:id="@+id/btnSalvar"
+        android:layout_width="91dp"
+        android:layout_height="35dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+        app:layout_constraintHorizontal_bias="0.385"
+        app:layout_constraintStart_toEndOf="@+id/btnInscritos"
         app:layout_constraintTop_toBottomOf="@+id/etLocalRealizacao"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/btnsalvar" />
 
     <ImageButton
-        android:id="@+id/btnDelete"
-        android:layout_width="136dp"
-        android:layout_height="53dp"
+        android:id="@+id/btnInscritos"
+        android:layout_width="105dp"
+        android:layout_height="35dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etLocalRealizacao"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/btninscritos" />
+
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="91dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="#00FFFFFF"
         android:onClick="delete"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnInscricao"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etLocalRealizacao"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/btnexcluir"
@@ -198,6 +211,18 @@
         app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etData" />
+
+    <ListView
+        android:id="@+id/ltInscricoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnInscritos" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

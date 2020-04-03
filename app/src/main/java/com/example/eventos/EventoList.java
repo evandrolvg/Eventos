@@ -1,6 +1,7 @@
 package com.example.eventos;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class EventoList extends ArrayAdapter<Evento> {
         View listViewItem = inflater.inflate(R.layout.eventos_list, null, true);
 
         TextView tvNome = (TextView) listViewItem.findViewById(R.id.tvNome);
-        TextView tvDescricao = (TextView) listViewItem.findViewById(R.id.tvDescricao);
+        TextView tvDescricao = (TextView) listViewItem.findViewById(R.id.tvEmail);
         TextView tvData = (TextView) listViewItem.findViewById(R.id.tvData);
         TextView tvValor = (TextView) listViewItem.findViewById(R.id.tvValor);
         TextView tvQtdeVagas = (TextView) listViewItem.findViewById(R.id.tvQtdeVagas);
@@ -39,6 +40,7 @@ public class EventoList extends ArrayAdapter<Evento> {
         tvQtdeVagas.setText(String.valueOf(evento.getQtdeVagas()));
         tvLocalRealizacao.setText(evento.getLocalRealizacao());
 
+        //Log.d("listview", "Evento");
         return listViewItem;
     }
 }
