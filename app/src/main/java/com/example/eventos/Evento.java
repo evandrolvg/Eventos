@@ -1,7 +1,5 @@
 package com.example.eventos;
 
-import java.util.Date;
-
 public class Evento {
     private String id;
     private String nome;

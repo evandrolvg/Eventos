@@ -60,7 +60,7 @@ public class EventoController extends AppCompatActivity {
         etQtdeVagas = findViewById(R.id.etQtdeVagas);
         etLocalRealizacao = findViewById(R.id.etLocalRealizacao);
 
-        btnSalvar = (ImageButton) findViewById(R.id.btnSalvar);
+        btnSalvar = (ImageButton) findViewById(R.id.btnInscricao);
         btnDelete = (ImageButton) findViewById(R.id.btnDelete);
 
         btnAddEvento = (FloatingActionButton) findViewById(R.id.btnAddEvento);
@@ -93,7 +93,7 @@ public class EventoController extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.add_evento, null);
         dialogBuilder.setView(dialogView);
 
-        final ImageButton btnSalvar = (ImageButton) dialogView.findViewById(R.id.btnSalvar);
+        final ImageButton btnSalvar = (ImageButton) dialogView.findViewById(R.id.btnInscricao);
 
         final EditText etNome = (EditText) dialogView.findViewById(R.id.etNome);
         final EditText etDescricao = (EditText) dialogView.findViewById(R.id.etDescricao);
@@ -135,7 +135,7 @@ public class EventoController extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.add_evento, null);
         dialogBuilder.setView(dialogView);
 
-        final ImageButton btnSalvar = (ImageButton) dialogView.findViewById(R.id.btnSalvar);
+        final ImageButton btnSalvar = (ImageButton) dialogView.findViewById(R.id.btnInscricao);
         final ImageButton btnDelete = (ImageButton) dialogView.findViewById(R.id.btnDelete);
 
         final EditText etNome = (EditText) dialogView.findViewById(R.id.etNome);

@@ -1,10 +1,19 @@
 package com.example.eventos;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     ListView ltEventos;
     List<Evento> eventos;
     DatabaseReference databaseEventos;
+    DatabaseReference databaseInscricoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
         databaseEventos = FirebaseDatabase.getInstance().getReference("eventos");
         ltEventos = (ListView) findViewById(R.id.ltEventos);
         eventos = new ArrayList<>();
+
+        ltEventos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Evento evento = eventos.get(i);
+                showInscricaoDialog(evento.getId());
+            }
+        });
     }
 
     @Override
@@ -52,5 +70,49 @@ public class MainActivity extends AppCompatActivity {
     public void logar(View view) {
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
+    }
+
+    private void showInscricaoDialog(final String evento_id) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.inscricao_evento, null);
+        dialogBuilder.setView(dialogView);
+
+        final ImageButton btnInscricao = (ImageButton) dialogView.findViewById(R.id.btnInscricao);
+
+        final EditText etNome = (EditText) dialogView.findViewById(R.id.etNomeInscricao);
+        final EditText etEmail = (EditText) dialogView.findViewById(R.id.etEmailInscricao);
+
+
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        btnInscricao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nome = etNome.getText().toString().trim();
+                String email = etEmail.getText().toString().trim();
+
+                if (!TextUtils.isEmpty(nome) && !TextUtils.isEmpty(email)) {
+                    inscricaoEvento(evento_id, nome, email);
+                    b.dismiss();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Por favor, preencha todos os campos", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private boolean inscricaoEvento(String evento_id, String nome, String email) {
+        databaseInscricoes = FirebaseDatabase.getInstance().getReference("inscricoes").child(evento_id);
+
+        String id = databaseInscricoes.push().getKey();
+        Inscricao inscricao = new Inscricao(id, nome, email);
+
+        databaseInscricoes.child(id).setValue(inscricao);
+
+        Toast.makeText(this, "Inscrito com sucesso.", Toast.LENGTH_LONG).show();
+
+        return true;
     }
 }
