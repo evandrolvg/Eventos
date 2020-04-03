@@ -1,7 +1,6 @@
 package com.example.eventos;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ public class InscricaoList extends ArrayAdapter<Inscricao> {
         super(context, R.layout.inscricoes_list, inscricoes);
         this.context = context;
         this.inscricoes = inscricoes;
-
     }
 
     @Override

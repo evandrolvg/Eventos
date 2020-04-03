@@ -43,7 +43,6 @@ public class Login extends AppCompatActivity {
                 } else {
                     Log.d("AUTH", "onAuthStateChanged:signed_out");
                 }
-
             }
         };
     }
@@ -73,7 +72,6 @@ public class Login extends AppCompatActivity {
                     if (!task.isSuccessful()) {
                         Toast.makeText(getApplicationContext(),"Falha ao efetuar o login",Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(getApplicationContext(),"Ok",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), EventoController.class);
                         startActivity(intent);
                     }

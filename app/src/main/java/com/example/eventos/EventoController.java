@@ -159,6 +159,13 @@ public class EventoController extends AppCompatActivity {
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
+        etNome.setText(nome);
+        etDescricao.setText(descricao);
+        etData.setText(data);
+        etValor.setText(valor.toString());
+        etQtdeVagas.setText(String.valueOf(qtdeVagas));
+        etLocalRealizacao.setText(localRealizacao);
+
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
